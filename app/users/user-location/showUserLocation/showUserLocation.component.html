@@ -1,0 +1,23 @@
+  <form #editForm="ngForm"  id="editForm" >
+      <!-- <div *ngIf="editForm.dirty" style="color: orangered" >
+          <p><strong>You have made changes. Any unsaved changes will be lost.</strong></p>
+      </div> -->
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;"
+      >User Location</mat-card-title
+    >   
+    <mat-list>
+        <mat-list-item *ngFor="let item of locations">{{item.locationName}}<mat-icon style="cursor: pointer; margin-right: 10px" (click)="removeUserLocations(item.authorityUnitId)">delete</mat-icon>
+        </mat-list-item>
+      </mat-list>
+
+    <button mat-raised-button style="margin-left: 5px;"  [mat-dialog-close]="false" color="warn">Close</button>
+<!-- 
+    <button
+    mat-raised-button
+    style="margin-left: 5px;"
+    type="submit"
+    form="editForm"
+  >
+    Submit
+  </button> -->
+  </form>

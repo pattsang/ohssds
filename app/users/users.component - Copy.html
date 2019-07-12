@@ -1,0 +1,104 @@
+<mat-card>
+  <div>
+    <button mat-raised-button routerLink="/invite">Invite User</button>
+    <!-- <button mat-raised-button routerLink="/resendEmail">Resend Email</button> -->
+    <button mat-raised-button *appHasRole="['Super Admin']" routerLink="/create-user">Create Internal User</button>
+    <!-- <button mat-raised-button routerLink="/create-user">Create Internal User</button> -->
+  </div>
+
+  <div fxLayout fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input
+        matInput
+        type="text"
+        (keyup)="doFilter($event.target.value)"
+        placeholder="Filter"
+      />
+    </mat-form-field>
+  </div>
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table #Table [dataSource]="MyDataSource" matSort>
+      <!-- <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          User Name
+        </mat-header-cell>
+        <mat-cell
+          *matCellDef="let user"
+        >
+          {{ user.userName }}
+        </mat-cell>
+      </ng-container> -->
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Edit
+      </mat-header-cell>
+      <mat-cell *matCellDef="let user">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item *ngIf="user.isActive" [routerLink]="['/update-user/', user.userOutsideId]">
+            <mat-icon>edit</mat-icon>
+            <span>Edit User</span>
+          </button>
+          <button mat-menu-item *ngIf="user.isActive"  [routerLink]="['/user-permission/', user.userOutsideId]">
+            <mat-icon>check</mat-icon>
+            <span>Edit Permission</span>
+          </button>
+          <button mat-menu-item *ngIf="user.isActive" [routerLink]="['/user-location/', user.userOutsideId]">
+            <mat-icon>edit_location</mat-icon>
+            <span>Assign Location</span>
+          </button>
+          <button mat-menu-item *ngIf="!user.isActive" [routerLink]="['/resendEmail/', user.userOutsideId]">
+            <mat-icon>email</mat-icon>
+            <span>Resend Email</span>
+          </button>
+        </mat-menu>
+      </mat-cell>
+    </ng-container>
+
+      <ng-container matColumnDef="firstname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          First Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.firstName }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="lastname">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Last Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.lastName }} </mat-cell>
+      </ng-container>
+      
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Email
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.emailAddress }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="usertype">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Permission
+        </mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{ user.userType }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            Location
+          </mat-header-cell>
+          <mat-cell *matCellDef="let user"><a [routerLink]="['/showUserLocation/', user.userOutsideId]"> ... </a> </mat-cell>
+        </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </div>
+</mat-card>

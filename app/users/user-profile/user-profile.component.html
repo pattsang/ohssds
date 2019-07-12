@@ -1,0 +1,298 @@
+    <form
+      
+      (ngSubmit)="UpdatePassword()"
+    >
+      <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;">Change Password</mat-card-title>
+  
+      <div class="example-container">
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Enter your password"
+            [type]="hide ? 'password' : 'text'"
+            required
+            name="password"
+            [(ngModel)]="password"
+          />
+          <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Confirm your password"
+            [type]="hide ? 'password' : 'text'"
+            [(ngModel)]="confirmPassword"
+            required
+            name="confirmPassword"
+          />
+          <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          class="btn btn-lg btn-primary btn-block button"
+          type="submit"
+        >
+          Save
+        </button>
+      </div>
+    </form>
+
+  <form #editForm="ngForm" (ngSubmit)="updateSDSUser()" id="editForm" >
+      <!-- <div *ngIf="editForm.dirty" style="color: orangered" >
+          <p><strong>You have made changes. Any unsaved changes will be lost.</strong></p>
+      </div> -->
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;"
+      >Edit</mat-card-title
+    >
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Email"
+        value="{{ sdsUser?.emailAddress }}"
+        readonly
+      />
+      <mat-hint>Readonly field</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="First Name"
+        name="firstName"
+        [(ngModel)]="sdsUser.firstName"
+      />
+    </mat-form-field>
+
+   <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Last Name"
+        name="lastName"
+        [(ngModel)]="sdsUser.lastName"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Postal Code"
+        name="postalCode"
+        [(ngModel)]="sdsUser.postalCode"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Address 1"
+        name="addressLine1"
+        [(ngModel)]="sdsUser.addressLine1"
+      />
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Address 2"
+        name="addressLine2"
+        [(ngModel)]="sdsUser.addressLine2"
+      />
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Country"
+        name="country"
+        [(ngModel)]="sdsUser.country"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="City"
+        name="city"
+        [(ngModel)]="sdsUser.city"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Province"
+        name="province"
+        [(ngModel)]="sdsUser.province"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Fax Number"
+        name="faxNumber"
+        [(ngModel)]="sdsUser.faxNumber"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Phone Number"
+        name="phoneNumber"
+        [(ngModel)]="sdsUser.phoneNumber"        
+      />
+    </mat-form-field>
+    <button mat-raised-button style="margin-left: 5px;"  [mat-dialog-close]="false" color="warn">Close</button>
+
+    <button
+    mat-raised-button
+    style="margin-left: 5px;"
+    type="submit"
+    [disabled]="!editForm.dirty"
+    form="editForm"
+  >
+    Save
+  </button>
+  </form>
+<!-- <update-user></update-user> -->
+  <!-- <mat-card class="form-style">  
+      <form #editForm="ngForm" (ngSubmit)="null" id="editForm" > -->
+          <!-- <div *ngIf="editForm.dirty" style="color: orangered" >
+              <p><strong>You have made changes. Any unsaved changes will be lost.</strong></p>
+          </div> -->
+        <!-- <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;"
+          >Update your profile</mat-card-title
+        >
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Email"
+            value="{{ model?.emailAddress }}"
+            readonly
+          />
+          <mat-hint>Readonly field</mat-hint>
+        </mat-form-field>
+    
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="First Name"
+            name="firstName"
+            [(ngModel)]="model.firstName"
+          />
+        </mat-form-field>
+    
+       <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Last Name"
+            name="lastName"
+            [(ngModel)]="model.lastName"
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Postal Code"
+            name="postalCode"
+            [(ngModel)]="model.postalCode"
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Address 1"
+            name="addressLine1"
+            [(ngModel)]="model.addressLine1"
+          />
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Address 2"
+            name="addressLine2"
+            [(ngModel)]="model.addressLine2"
+          />
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Postal Code"
+            name="postalCode"
+            [(ngModel)]="model.postalCode"
+          />
+        </mat-form-field>
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Country"
+            name="country"
+            [(ngModel)]="model.country"
+          />
+        </mat-form-field> -->
+    
+        <!-- <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="City"
+            name="city"
+            [(ngModel)]="model.city"
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="State"
+            name="state"
+            [(ngModel)]="model.state"
+          />
+        </mat-form-field>
+    
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Fax Number"
+            name="faxNumber"
+            [(ngModel)]="model.faxNumber"
+          />
+        </mat-form-field> -->
+    
+        <!-- <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Phone Number"
+            name="phoneNumber"
+            [(ngModel)]="model.phoneNumber"        
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          style="margin-left: 5px;"
+          type="button"
+          routerLink="/users"
+        >
+          Back
+        </button>
+        
+        <button
+        mat-raised-button
+        style="margin-left: 5px;"
+        type="submit"
+        [disabled]="!editForm.dirty"
+        form="editForm"
+      >
+        Save
+      </button>
+      </form>
+    </mat-card>
+     -->

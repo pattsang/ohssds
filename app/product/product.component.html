@@ -1,0 +1,121 @@
+<mat-card>
+  <mat-card-title>
+    <span>Search SDS</span>
+  </mat-card-title>
+
+  <mat-card-content>
+    <form>
+      <div class="fullWidth flex-container">
+        <mat-form-field style="width:400px !important">
+          <mat-icon matSuffix>search</mat-icon>
+          <input #searchBox name="searchBox" type="text" matInput color="secondary"
+            placeholder="product name, product code or manufacturer" (click)="searchBoxClick(); searchBox.value = null; loadComponent = false"/>
+        </mat-form-field>
+
+        <mat-form-field style="width:150px; margin-left: 5px;" *ngIf="loggedIn()">
+            <mat-select placeholder="Site" [(ngModel)]="selectedLevel2Authority" name="level2authority" >
+              <mat-option *ngFor="let level2authority of level2Authorities" [value]="level2authority.authorityUnitId">
+                {{level2authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> 
+
+        <mat-form-field style="width:150px; margin-left: 5px;" *ngIf="loggedIn()">
+            <mat-select placeholder="Department" [(ngModel)]="selectedLevel3Authority" name="level3authority">
+              <mat-option  *ngFor="let level3authority of level3Authorities" [value]="level3authority.authorityUnitId">
+                {{level3authority.name}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-card-actions style="margin-left: 5px;">
+          <button (click)="getProduct(searchBox.value)" mat-raised-button
+            matTooltip="Click Clear before starting a new search"
+            aria-label="Button that displays a tooltip when focused or hovered over">Search</button>
+        </mat-card-actions>
+        <!-- <mat-card-actions style="margin-left: 10px;">
+          <button mat-raised-button (click)="searchBox.value = null; loadComponent = false">Clear</button>
+        </mat-card-actions> -->
+      </div>
+      <!-- <div class="flex-container-with-space">
+        <mat-checkbox name="productNameChecked" class="example-margin" [(ngModel)]="productNameChecked" [(indeterminate)]="indeterminate"
+          [labelPosition]="labelPosition" [disabled]="disabled"
+          style="width: 170px;padding: 4px;margin-left: 25px; border:1px solid grey; margin: 1px">
+          Filter By Product Name
+        </mat-checkbox> 
+
+        <mat-checkbox name="productCodeChecked" class="example-margin" [(ngModel)]="productCodeChecked" [(indeterminate)]="indeterminate"
+          [labelPosition]="labelPosition" [disabled]="disabled"
+          style="width: 170px;padding: 4px;margin-left: 25px; border:1px solid grey; margin: 1px">
+          Filter By Product Code
+        </mat-checkbox>
+
+        <mat-checkbox name="casNumberChecked" class="example-margin" [(ngModel)]="casNumberChecked" [(indeterminate)]="indeterminate"
+          [labelPosition]="labelPosition" [disabled]="disabled"
+          style="width: 170px;padding: 4px;margin-left: 25px; border:1px solid grey; margin: 1px">
+          Filter By CasNumber
+        </mat-checkbox>
+
+        <mat-checkbox name="manufacturerChecked" class="example-margin" [(ngModel)]="manufacturerChecked"
+          [(indeterminate)]="indeterminate" [labelPosition]="labelPosition" [disabled]="disabled"
+          style="width: 170px;padding: 4px;margin-left: 25px; border:1px solid grey; margin: 1px">
+          Filter By Manufacturer
+        </mat-checkbox>
+      </div> -->
+    </form>
+
+    <!-- <app-product-list [searchInput] = "searchInput"></app-product-list> -->
+    <!-- <app-product-list [searchBox]="searchBox" *ngIf="loadComponent"></app-product-list> -->
+    <app-product-list [searchBox]="searchBox" *ngIf="loadComponent"></app-product-list>
+
+  </mat-card-content>
+
+</mat-card>
+
+<mat-card>
+  <mat-card-content class="flex-space-between">
+    <div class="search-location">
+      <mat-card-title>Refine search by location:</mat-card-title>
+      <app-tree-checkbox></app-tree-checkbox>
+      <div class="button-group" class="flex-space-around" >
+        <button mat-raised-button>Export List</button>
+        <button mat-raised-button>Create Backup</button>
+      </div>
+    </div>  
+    <div class="search-hazard">
+        <mat-card-title>Refine search by hazard - template:</mat-card-title>
+        <app-tree-checkbox></app-tree-checkbox>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card >
+  <div class="include-fields">
+      <mat-card-title>Include:</mat-card-title>
+      <mat-card-content style="display: flex; flex-direction: column;">
+        <mat-checkbox >
+        Product Name
+      </mat-checkbox>
+      <mat-checkbox >
+        Product Code
+      </mat-checkbox>
+      <mat-checkbox >
+        Last VerifiedDate
+      </mat-checkbox>
+      <mat-checkbox >
+        Supplier/Manufacturer
+      </mat-checkbox>
+      <mat-checkbox >
+        Health Authority
+      </mat-checkbox>
+      <mat-checkbox >
+        Facility/Department
+      </mat-checkbox>
+      <div class="button-group" class="flex-space-around" >
+          <button mat-raised-button>Generate List</button>
+          <button mat-raised-button>Cancel</button>
+        </div>
+      </mat-card-content>
+  </div>
+ 
+</mat-card>

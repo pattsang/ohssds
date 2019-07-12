@@ -1,0 +1,30 @@
+.container {
+    width: 100%;
+    height: 100%;
+}
+
+.search-select-left, .authority-left {
+    width: 20%;
+}
+
+.search-search-right, .authority-right {
+    width: 75%;
+}
+
+.search {
+    height: 15%;
+}
+
+.authority-two-columns {
+    /* of the total screen */
+    height: 70%; 
+    border: solid grey 1px;
+}
+
+.authority-left, .authority-right {
+    
+    border: solid grey 1px;
+    height: 90%;
+    max-height: 350px;
+    position: relative;
+}

@@ -1,0 +1,295 @@
+ <section gdAreas="invite search search | left-content right-content right-content" gdGap="5px" gdRows="auto auto auto">
+
+      <br/> <br/>
+        <div gdArea="search" fxLayoutAlign="center center">
+          <!-- just to hold space -->
+        </div>
+        
+        <div gdArea="left-content">
+            <div fxLayout fxLayoutAlign="center center" style="height: 50px; margin: 35px;">
+                <!-- this is a spacer, not being used -->
+            </div>
+
+      
+       <mat-form-field style="width: 50%; margin: 10px;">
+        <mat-select
+          placeholder="Health Hazard Class"
+          [disabled]="searchResultIsEmpty"
+          [formControl]="healthHazardClassList"
+          multiple
+          [(value)]="selectedHealthClass"
+          (selectionChange)="
+            onSelectedHealthHazardClass(selectedHealthClass)
+          "
+        >
+          <mat-option
+            *ngFor="let health of healthClass"
+            [value]="health.healthClassId"
+          >
+            {{ health.healthClassName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="healthHazardClassList.hasError('required')"
+          >Please choose a health class</mat-error
+        >
+      </mat-form-field>
+  
+      <mat-form-field style="width: 50%; margin: 10px;">
+        <mat-select
+          placeholder="Physical Hazard Class"
+          [disabled]="searchResultIsEmpty"
+          [formControl]="physicalHazardClassList"
+          multiple
+          [(value)]="selectedPhysicalClass"
+          (selectionChange)="
+            onSelectedPhysicalHazardClass(selectedPhysicalClass)
+          "
+        >
+          <mat-option
+            *ngFor="let physical of physicalClass"
+            [value]="physical.physicalClassId"
+          >
+            {{ physical.physicalClassName }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="healthHazardClassList.hasError('required')"
+          >Please choose a Physical class</mat-error
+        >
+      </mat-form-field>
+  
+            <!-- <mat-card style="width:90%; margin: 5px auto; box-shadow: -4px 4px #C6C6C6;"> -->
+            <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding style="margin-right: 5% !important">
+                  <button mat-icon-button disabled></button>
+                  <!-- <mat-icon class="mat-icon-rtl-mirror">
+                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                  </mat-icon> -->
+                  <!-- <mat-checkbox class="checklist-leaf-node"
+                                [checked]="checklistSelection.isSelected(node)"
+                                (change)="todoLeafItemSelectionToggle(node)"  style="font-size: 90% !important; font: bold !important; padding-left: 10px !important">{{node.item}}</mat-checkbox> -->
+                                <mat-checkbox class="checklist-leaf-node"
+                                [checked]="checklistSelection.isSelected(node)"
+                                (change)="clickedActive(node)"
+                                 style="font-size: 90% !important; font: bold !important; padding-left: 10px !important">{{node.item}}</mat-checkbox>
+                                <!-- <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button> -->
+                                <!-- <button mat-icon-button (click)="updateNode(node)"><mat-icon>edit</mat-icon></button> -->
+                </mat-tree-node>
+              
+                <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding style="padding-left: 10px !important">
+                  <button mat-icon-button disabled></button>
+                  <mat-form-field>
+                    <!-- <input matInput #itemValue placeholder="New item..."> -->
+                  </mat-form-field>
+                  <!-- <button mat-button (click)="saveNode(node, itemValue.value)">Save</button> -->
+                </mat-tree-node>
+              
+                <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding style="padding-left: 10px !important">
+                  <button mat-icon-button matTreeNodeToggle
+                          [attr.aria-label]="'toggle ' + node.filename">
+                    <mat-icon class="mat-icon-rtl-mirror">
+                      {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                    </mat-icon>
+                  </button>
+                  <mat-checkbox [checked]="descendantsAllSelected(node)"
+                                
+                                (change)="todoItemSelectionToggle(node)" style="font-size: 90% !important; font:bold !important; padding-left: 10px !important">{{node.item}}</mat-checkbox>
+                  <!-- <button mat-icon-button *ngIf="node.hasChild" (click)="removeNode(node)"><mat-icon>clear</mat-icon></button> -->
+                </mat-tree-node>
+              </mat-tree>
+              <button mat-raised-button style="margin-left: 20px" (click)="assignProduct()">Assign</button>
+          <!-- </mat-card> -->
+
+                  </div>
+                  <div gdArea="right-content" gdColumn="2 / span 2" >
+                    <mat-form-field>
+                      <mat-label>Select a parameter</mat-label>
+                      <mat-select (selectionChange)="onSelectParameter($event)" [(value)]="selectedParameter">
+                        <mat-option value="none">All</mat-option>
+                        <mat-option value="productName">Product Name</mat-option>
+                        <mat-option value="productCode">Product Code</mat-option>
+                        <mat-option value="manufacturer">Manufacturer Name</mat-option>
+                        <mat-option value="casNo">Cas Number</mat-option>
+                        <mat-option value="secondaryName">Secondary Name</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="selectFormControl.hasError('required')">
+                        This field is required
+                      </mat-error>
+                    </mat-form-field>
+                     <mat-form-field style="margin-left: 5px; width:450px !important">
+                      <input
+                        #selectedValue
+                        name="selectedValue"
+                        type="text"
+                        matInput
+                        color="secondary"
+                        placeholder="Search Inventory"
+                        (keyup.enter)="searchForProducts(selectedValue.value)"
+                      />
+                      <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+      <span>
+          <!-- <div fxLayout fxLayoutAlign="center center">
+          <mat-form-field fxFlex="40%">
+            <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" />
+          </mat-form-field>
+        </div>
+        <br/> <br/> -->
+      <div>
+          <button *ngIf="hideButton" mat-raised-button (click)="backUp()" style="margin-right:2%;"><a [target]="'_blank'">Backup</a></button>
+          <button *ngIf="hideButton" style="margin-left: 5%;" mat-raised-button color="primary" (click)="openExportList()">Export List</button>
+          <br/>
+          <br/>  
+  
+          <div
+          *ngIf="isLoading"
+          style="display: flex; justify-content: center; align-items: center; max-height: 95%;  overflow: auto">
+           <mat-progress-bar
+            color="primary"
+            mode="indeterminate"
+          ></mat-progress-bar>
+        </div> 
+  
+      <table mat-table [dataSource]="MyDataSource" class="mat-elevation-z8">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <th mat-header-cell *matHeaderCellDef>
+              <mat-checkbox (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [aria-label]="checkboxLabel()">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? selection.toggle(row) : null; isAllSelected()"
+                            [checked]="selection.isSelected(row)"
+                            [aria-label]="checkboxLabel(row)">
+              </mat-checkbox>
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="Product">
+            <th mat-header-cell *matHeaderCellDef> Product </th>
+            <td mat-cell *matCellDef="let product"  [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> {{ product?.product_name }}
+            </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="Manufacturer">
+            <th mat-header-cell *matHeaderCellDef> Manufacturer </th>
+            <td mat-cell *matCellDef="let product" [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> 
+              {{ product?.mfg_name }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Revised">
+            <th mat-header-cell *matHeaderCellDef> Revised </th>
+            <td mat-cell *matCellDef="let product"
+            [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> 
+            {{ product?.revision_date }}
+            </td>
+          </ng-container>
+  
+       <ng-container matColumnDef="Whmis Exempt">
+            <th mat-header-cell *matHeaderCellDef> Whmis Exempt </th>
+            <td mat-cell *matCellDef="let product"
+            [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> 
+            {{ product?.whmis_exempt }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Last Verified">
+            <th mat-header-cell *matHeaderCellDef> Last Verified </th>
+            <td mat-cell *matCellDef="let product"
+            [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> 
+            {{ product?.last_verified }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Date Added">
+            <th mat-header-cell *matHeaderCellDef> Date Added </th>
+            <td mat-cell *matCellDef="let product"
+            [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> 
+            {{ product?.date_added }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Discontinued">
+            <th mat-header-cell *matHeaderCellDef> Discontinued </th>
+            <td mat-cell *matCellDef="let product"
+            [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> 
+            {{ product?.discontinued }}
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Product Code">
+            <th mat-header-cell *matHeaderCellDef> Product Code </th>
+            <td mat-cell *matCellDef="let product"   [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"> {{ product?.product_code }}
+  
+            </td>
+          </ng-container>
+  
+          <ng-container matColumnDef="Detail">
+            <th mat-header-cell *matHeaderCellDef> Detail </th>
+            <td mat-cell *matCellDef="let product"   [ngStyle]="{
+              background: product.addedToInventory ? 'null' : '#D3D3D3'
+            }"><mat-icon
+            style="cursor: pointer"
+            (click)="openInventoryDetailPage(product)"
+            >library_books</mat-icon
+          >
+            </td>
+          </ng-container>
+  <!-- 
+          <ng-container matColumnDef="Detail">
+            <mat-header-cell *matHeaderCellDef mat-sort-header class="title">
+              Detail
+            </mat-header-cell>
+            <mat-cell
+              *matCellDef="let row"
+              [ngStyle]="{
+                background: row.addedToInventory ? 'null' : '#D3D3D3'
+              }"
+              ><mat-icon
+                style="cursor: pointer"
+                (click)="openInventoryDetailPage(row)"
+                >library_books</mat-icon
+              >
+            </mat-cell>
+          </ng-container> -->
+  
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr  mat-row *matRowDef="let row; columns: displayedColumns;"
+              (click)="selection.toggle(row)">
+          </tr>
+          
+        </table>
+        </div>
+        <!-- <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+          </mat-paginator> -->
+
+          <!-- <mat-paginator #paginator [pageIndex]="pageIndex" [length]="totalItems" [pageSize]="itemsPerPage" [pageSizeOptions]="[5, 10, 20]"
+          (page)="pageChanged($event)" >
+          </mat-paginator> -->
+           <!-- "{"currentPage":2,"itemsPerPage":10,"totalItems":217,"totalPages":22}" -->
+
+          <mat-paginator #paginator [pageIndex]="pageIndex" [showFirstLastButtons]="true" [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+          (page)="pageChanged($event)" >
+          </mat-paginator>
+        </span>
+        </div>
+      </section>

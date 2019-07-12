@@ -1,0 +1,124 @@
+  <form #editForm="ngForm" (ngSubmit)="updateUser()" id="editForm" >
+      <!-- <div *ngIf="editForm.dirty" style="color: orangered" >
+          <p><strong>You have made changes. Any unsaved changes will be lost.</strong></p>
+      </div> -->
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;"
+      >Edit</mat-card-title
+    >
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Email"
+        value="{{ user?.emailAddress }}"
+        readonly
+      />
+      <mat-hint>Readonly field</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="First Name"
+        name="firstName"
+        [(ngModel)]="user.firstName"
+      />
+    </mat-form-field>
+
+   <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Last Name"
+        name="lastName"
+        [(ngModel)]="user.lastName"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Postal Code"
+        name="postalCode"
+        [(ngModel)]="user.postalCode"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Address 1"
+        name="addressLine1"
+        [(ngModel)]="user.addressLine1"
+      />
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Address 2"
+        name="addressLine2"
+        [(ngModel)]="user.addressLine2"
+      />
+    </mat-form-field>
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Country"
+        name="country"
+        [(ngModel)]="user.country"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="City"
+        name="city"
+        [(ngModel)]="user.city"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Province"
+        name="province"
+        [(ngModel)]="user.province"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Fax Number"
+        name="faxNumber"
+        [(ngModel)]="user.faxNumber"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Phone Number"
+        name="phoneNumber"
+        [(ngModel)]="user.phoneNumber"        
+      />
+    </mat-form-field>
+    <!-- <button
+      mat-raised-button
+      style="margin-left: 5px;"
+      type="button"
+      routerLink="/users"
+    >
+      Back
+    </button> -->
+    <button mat-raised-button style="margin-left: 5px;"  [mat-dialog-close]="false" color="warn">Close</button>
+
+    <button
+    mat-raised-button
+    style="margin-left: 5px;"
+    type="submit"
+    [disabled]="!editForm.dirty"
+    form="editForm"
+  >
+    Save
+  </button>
+  </form>

@@ -1,0 +1,129 @@
+<mat-card>
+  <form
+    #updateManufacturer="ngForm"
+    (ngSubmit)="updateManufacturerInformation()"
+    id="updateManufacturer"
+  >
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;"
+      >Edit Manufacturer</mat-card-title
+    >
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Company Name"
+        name="name"
+        [(ngModel)]="model.name"  
+      />
+    </mat-form-field>
+
+    
+    <mat-form-field class="fullWidth">
+      <input matInput placeholder="URL" name="url" [(ngModel)]="model.url" />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="MSDS Url"
+        name="msdsUrl"
+        [(ngModel)]="model.msdsUrl"
+      />
+    </mat-form-field>
+
+
+    <mat-form-field style="width:100%">
+      <textarea
+        matInput
+        placeholder="Notes"
+        name="notes"
+        [(ngModel)]="model.notes"
+      ></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="width:100%">
+      <mat-label>Contact Location</mat-label>
+      <mat-select
+        [formControl]="ContactLocationFormControl"
+        multiple
+        [(value)]="selectedContactInfo"
+        [(ngModel)]="selectedContactInfo"
+        (selectionChange)="onSelectContactLocation(selectedContactInfo)"
+      >
+        <mat-optgroup
+          *ngFor="let group of ContactLocationGroups"
+          [label]="group.name"
+          [disabled]="group.disabled"
+        >
+          <mat-option
+            *ngFor="let model of group.contactLocation"
+            [value]="model.value"
+          >
+            {{ model.viewValue }}
+          </mat-option>
+        </mat-optgroup>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Email"
+        name="contactEmail"
+        [(ngModel)]="model.contactEmail"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Form URL"
+        name="contactUrl"
+        [(ngModel)]="model.contactUrl"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Phone"
+        name="contactPhoneNumber"
+        [(ngModel)]="model.contactPhoneNumber"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth">
+      <input
+        matInput
+        placeholder="Fax"
+        name="contactFaxNumber"
+        [(ngModel)]="model.contactFaxNumber"
+      />
+    </mat-form-field>
+
+    <mat-form-field style="width:100%">
+      <textarea
+        matInput
+        placeholder="Contact Details"
+        name="contactDetails"
+        [(ngModel)]="model.contactDetails"
+      ></textarea>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      type="submit"
+      form="updateManufacturer"
+    >
+      Save
+    </button>
+
+    <button
+      mat-raised-button
+      [mat-dialog-close]="false"
+      color="warn"
+    >
+      Back
+    </button>
+
+  </form>
+</mat-card>

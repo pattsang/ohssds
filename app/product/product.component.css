@@ -1,0 +1,19 @@
+/deep/ .mat-checkbox-frame { 
+    border-color: grey 
+}
+
+.flex-space-around {
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+.search-location, .search-hazard, .include-fields {
+    border: 1px solid grey;
+    padding: 10px;
+    width: 40%;
+}
+

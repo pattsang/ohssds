@@ -1,0 +1,21 @@
+    <mat-select placeholder="Filter By Manufacturers" [formControl]="manufacturerList" multiple [(value)]="selected" (selectionChange)="onSelectManufacturers(selected)" >
+      <mat-option *ngFor="let manufacturer of manufacturers" [value]="manufacturer.manufacturerId" >
+        {{  manufacturer.manufacturerName}}
+      </mat-option>
+    </mat-select>
+
+    <!-- <form>
+      <mat-form-field class="container"  style="width:400px;" >
+          <input type="text" placeholder="Select a Manufacturer"
+              matInput 
+              [formControl]="searchTerm"
+              [matAutocomplete]="auto" [(value)]="selected" (selectionChange)="onSelectManufacturers(selected)">  
+
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let list of myList" [value]="list.manufacturerName">
+              {{ list.manufacturerName }}
+            </mat-option>
+          </mat-autocomplete>
+      </mat-form-field>
+
+  </form> -->

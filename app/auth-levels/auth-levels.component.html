@@ -1,0 +1,40 @@
+<mat-card class="example-card">
+  <p mat-dialog-title fxLayout fxLayoutAlign="center"> Select Location </p>
+
+  <mat-dialog-content>
+    <form #editSiteForm (ngSubmit)="null">
+        <mat-form-field class="fullWidth">
+            <mat-select placeholder="Parent Site" (selectionChange)="onUserSelectTop()" [(value)]="selectedAuthority" required> 
+              <mat-option *ngFor="let authority of authorities" [value]="authority.authorityUnitId">
+                {{authority.name}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>This must be selected first</mat-hint>
+          </mat-form-field>
+
+      <div class="new-site">
+        <mat-form-field class="fullWidth">
+          <mat-select placeholder="Location" (selectionChange)="onUserSelectLevel1($event)" [(value)] = "selectedLevel1Authority" required>
+            <mat-option *ngFor="let level1authority of level1Authorities" [value]="level1authority.authorityUnitId">
+              {{level1authority.name}}
+            </mat-option>
+            <mat-hint>This must be selected second</mat-hint>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <mat-select placeholder="Site" (selectionChange)="onUserSelectLevel2($event)" [(value)] = "selectedLevel2Authority" required>
+            <mat-option *ngFor="let level2authority of level2Authorities" [value]="level2authority.authorityUnitId">
+              {{level2authority.name}}
+            </mat-option>
+            <mat-hint>This must be selected third</mat-hint>
+          </mat-select>
+        </mat-form-field> 
+
+
+      </div>
+
+    </form>
+  </mat-dialog-content>
+  
+</mat-card>

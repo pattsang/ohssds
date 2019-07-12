@@ -1,0 +1,45 @@
+.container {
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    width: 100%;
+    height: 98%;
+    justify-items: center;
+    border: 1px solid grey;
+}
+
+.search {
+    height: 15%;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+    align-self: center;
+}
+
+.two-columns {
+    display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 3fr;
+    height: 98%;
+    max-height: 800px;
+    overflow: auto;
+    box-sizing: border-box;
+    width: 100%;
+    justify-items: center;
+     
+}
+
+.left-25, .right-70 {
+    border: 1px solid grey;
+    height: 98%;
+    margin: 1%;
+    align-self: center;
+}
+.left-25 {
+    width: 98%;
+}
+.right-70 {
+    width: 98%;
+}
+
+
+

@@ -1,0 +1,21 @@
+<mat-nav-list>
+    <mat-list-item>
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>eject</mat-icon>
+            <span>Logout</span>
+            <!-- <button *ngIf="loggedIn()" mat-button (click)="logout()">Logout</button> -->
+        </button>
+    </mat-list-item>
+    <!-- <a mat-list-item routerLink="/register" (click)="onClose()">
+        <mat-icon>face</mat-icon><span class="nav-caption">Register</span>
+    </a> -->
+    <a mat-list-item routerLink="/login" (click)="onClose()">
+        <mat-icon>input</mat-icon>
+        <span>Login</span>
+    </a>
+    <a mat-list-item routerLink="/app-product" (click)="onClose()">
+        <mat-icon>search</mat-icon>
+        <span>Product</span>
+    </a>
+
+</mat-nav-list>

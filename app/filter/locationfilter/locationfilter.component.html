@@ -1,0 +1,7 @@
+<!-- <mat-form-field> -->
+  <mat-select placeholder="Filter By Location" [formControl]="locationList" multiple [(value)]="selected" (selectionChange)="onSelectLocation(selected)" >
+    <mat-option *ngFor="let location of locations" [value]="location.locationId" >
+      {{location.locationNames}}
+    </mat-option>
+  </mat-select>
+<!-- </mat-form-field> -->

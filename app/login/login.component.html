@@ -1,0 +1,114 @@
+    <!-- <mat-card class="form-style">
+    <form
+      #loginForm="ngForm"
+      
+      (ngSubmit)="login()"
+    >
+      <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;">Login</mat-card-title>
+
+      <div class="example-container container !important">
+        <div class="example-container">
+          <mat-form-field>
+            <input
+              matInput
+              placeholder="Enter your email"
+              name="email"
+              [(ngModel)]="model.email"
+              required
+            />
+          </mat-form-field>
+        </div>
+
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Enter your password"
+            [type]="hide ? 'password' : 'text'"
+            required
+            name="password"
+            [(ngModel)]="model.password"
+            autocomplete="on"
+          />
+          <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+      <div>
+        <button
+          mat-raised-button
+          [disabled]="!loginForm.valid"
+          class="btn btn-lg btn-primary btn-block button"
+          type="submit"
+        >
+          Login
+        </button>
+
+        <button mat-raised-button routerLink="/register">Register</button>
+
+        <button mat-raised-button routerLink="/forgotpassword">Forgot Password</button>
+      </div>
+
+    </form>
+    <br/>
+</mat-card> -->
+
+<mat-tab-group dynamicHeight>
+  <mat-tab label="Login">
+    <form
+    #loginForm="ngForm"
+    (ngSubmit)="login()"
+    style="padding: 20px !important"
+  >
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;">Login</mat-card-title>
+
+    <div class="example-container container !important">
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Enter your email"
+            name="email"
+            [(ngModel)]="model.email"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter your password"
+          [type]="hide ? 'password' : 'text'"
+          required
+          name="password"
+          [(ngModel)]="model.password"
+          autocomplete="on"
+        />
+        <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </mat-form-field>
+    </div>
+    <div>
+      <button
+        mat-raised-button
+        [disabled]="!loginForm.valid"
+        class="btn btn-lg btn-primary btn-block button"
+        type="submit"
+        style="margin-right: 5px"
+      >
+        Login
+      </button>
+
+      <!-- <button mat-raised-button routerLink="/register">Register</button> -->
+
+      <button mat-raised-button routerLink="/forgotpassword">Forgot Password</button>
+      <br/>
+    </div>
+  </form>
+  </mat-tab>
+  <mat-tab label="Register">
+    <register></register>
+  </mat-tab>
+</mat-tab-group>

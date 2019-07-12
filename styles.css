@@ -1,0 +1,123 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/alertifyjs/build/css/alertify.min.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+html, body {
+  
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family:  'Montserrat', sans-serif;
+  margin: 0;
+  box-sizing: content-box;
+}
+
+.body-text {
+  font-family:  'Roboto Slab', serif;
+  font-size: 1rem;
+}
+
+.title {
+  font-family: 'Avro',  serif;
+  font-size: 1.3rem;
+}
+
+.title-menu{
+  font-family: 'Avro',  serif;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.sub-title {
+  font-family: 'Avro', serif;
+  font-size: 1.1rem;
+}
+
+.sub-title-bold {
+  font-family: 'Avro', serif;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.halfWidth {
+  width: 50%;
+}
+
+.three-quarter-Width {
+  width: 75%;
+}
+
+.flex-container, .flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-container-with-space {
+  display: flex;
+  justify-content: space-around;
+}
+.spacerLeft {
+  margin-left: 5px;
+}
+.spacerLeft-30 {
+  margin-left: 30px;
+}
+.spacer-top {
+  margin-top: 10px;
+}
+
+.space-top-50 {
+  margin-top: 50px;
+}
+
+.spacer-bottom-20 {
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
+.mat-table-sticky {
+  border-top: 1px solid #e0e0e0;
+}
+
+tr:hover {
+  background: #f5f5f5;
+}
+
+tr:active {
+  background: #efefef;
+}
+
+.form-style {
+  margin: auto;
+  margin-top: 250px;
+  width: 30%;
+  border: 0.5px solid rgb(121, 124, 123);
+  padding: 10px;
+}
+
+.toolbar {
+  background-color: rgb(216, 211, 166);
+  color: black;
+}
+
+.btn-adm-primary {
+  background-color: rgb(216,211,166) !important;
+  color: black;
+}

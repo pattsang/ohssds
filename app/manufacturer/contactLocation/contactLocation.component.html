@@ -1,0 +1,11 @@
+              <mat-form-field style="width:100%">
+              <mat-label>Contact Location</mat-label>
+              <mat-select [formControl]="ContactLocationFormControl" multiple [(value)]="selected" (selectionChange)="onSelectContactLocation(selected)" >
+                <mat-optgroup *ngFor="let group of ContactLocationGroups" [label]="group.name"
+                              [disabled]="group.disabled">
+                  <mat-option *ngFor="let location of group.contactLocation" [value]="location.effectiveContactMethodFlag">
+                    {{location.viewValue}}
+                  </mat-option>
+                </mat-optgroup>
+              </mat-select>
+            </mat-form-field>

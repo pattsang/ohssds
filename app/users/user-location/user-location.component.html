@@ -1,0 +1,96 @@
+<mat-card class="form-style">
+    <mat-card-title>Assign location</mat-card-title>
+    <mat-card-content>
+      <form #assignForm="ngForm" (ngSubmit)="assignLocation()">
+
+          <mat-form-field class="fullWidth">
+              <input
+                matInput
+                placeholder="Email"
+                name="email"
+                value="{{ user?.emailAddress }}"  
+                readonly                  
+              />
+              <mat-hint>Readonly field</mat-hint>
+            </mat-form-field>
+
+        <!-- <mat-form-field class="fullWidth">
+          <mat-select placeholder="Authority" [(ngModel)]="selectedAuthority" name="authority">
+            <mat-option *ngFor="let authority of authorities" [value]="authority.authorityUnitId" >
+              {{authority.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+        <mat-form-field class="fullWidth">
+          <mat-select placeholder="Authority" (selectionChange)="doSomething($event)" [(value)] = "selectedAuthority">
+            <mat-option *ngFor="let authority of authorities" [value]="authority.authorityUnitId" >
+              {{authority.name}}  
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+<!-- <p>This is stuff we wrote: {{selectedAuthority}}</p> -->
+        <!-- <mat-form-field class="fullWidth">
+            <mat-select placeholder="Location" [(ngModel)]="selectedLevel1Authority" name ="level1authority">
+              <mat-option *ngFor="let level1authority of level1Authorities" [value]="level1authority.authorityUnitId"
+              >
+                {{level1authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+          <mat-form-field class="fullWidth">
+            <mat-select placeholder="Location" (selectionChange)="onUserSelectLevel1($event)" [(value)] = "selectedLevel1Authority">
+              <mat-option *ngFor="let level1authority of level1Authorities" [value]="level1authority.authorityUnitId"
+              >
+                {{level1authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+          <!-- <mat-form-field class="fullWidth">
+            <mat-select placeholder="Site" [(ngModel)]="selectedLevel2Authority" name="level2authority">
+              <mat-option *ngFor="let level2authority of level2Authorities" [value]="level2authority.authorityUnitId">
+                {{level2authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>     -->
+
+          <mat-form-field class="fullWidth">
+            <mat-select placeholder="Site" (selectionChange)="onUserSelectLevel2($event)" [(value)] = "selectedLevel2Authority">
+              <mat-option *ngFor="let level2authority of level2Authorities" [value]="level2authority.authorityUnitId">
+                {{level2authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> 
+
+          <!-- <mat-form-field class="fullWidth">
+            <mat-select placeholder="Department" [(ngModel)]="selectedLevel3Authority" name="level3authority">
+              <mat-option *ngFor="let level3authority of level3Authorities" [value]="level3authority.authorityUnitId">
+                {{level3authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
+          <mat-form-field class="fullWidth" [hidden]="hideLevel3DropDown">
+            <mat-select placeholder="Department" (selectionChange)="onUserSelectLevel3($event)" [(value)] = "selectedLevel3Authority">
+              <mat-option *ngFor="let level3authority of level3Authorities" [value]="level3authority.authorityUnitId">
+                {{level3authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+  
+        <mat-card-actions style="margin-left: 5px;">
+          <button  mat-raised-button
+            matTooltip="Press to assign"
+            aria-label="Button that displays a tooltip when focused or hovered over">Assign</button>
+            <button
+            mat-raised-button
+            style="margin-left: 5px;"
+            type="button"
+            routerLink="/users"
+          >
+            Back
+          </button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>

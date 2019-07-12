@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-title>Product Details</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Cas Number" [(ngModel)]="product.CasNumber" name="CasNumber">
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Product Alias" [(ngModel)]="product.ProductAlias" name="ProductAlias">
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Product Name" [(ngModel)]="product.ProductName" name="ProductName">
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <input matInput  placeholder="Product Code" [(ngModel)]="product.ProductCode"
+          name="ProductCode">
+      </mat-form-field>
+      <mat-form-field class="fullWidth">
+        <input matInput placeholder="Additional Supplier" [(ngModel)]="product.AdditionalSupplier" name="AddtionalSupplier">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

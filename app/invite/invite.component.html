@@ -1,0 +1,98 @@
+
+    <form (ngSubmit)="inviteUser()">
+        <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;">Invite User</mat-card-title>
+
+      <mat-form-field class="fullWidth">
+        <mat-select
+          placeholder="Authority"
+          [(ngModel)]="selectedAuthority"
+          name="authority"
+        >
+          <mat-option
+            *ngFor="let authority of authorities"
+            [value]="authority.authorityUnitId"
+          >
+            {{ authority.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <mat-form-field class="fullWidth">
+        <mat-select placeholder="Authority">
+          <mat-option *ngFor="let authority of authorities" [value]="authority" >
+            {{authority.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+      <!-- 
+      <mat-form-field class="fullWidth">
+        <mat-select placeholder="Location">
+          <mat-option *ngFor="let level1authority of level1Authorities" [value]="level1authority"
+          >
+            {{level1authority.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth">
+        <mat-select placeholder="Site">
+          <mat-option *ngFor="let level2authority of level2Authorities" [value]="level2authority">
+            {{level2authority.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth">
+        <mat-select placeholder="Department">
+          <mat-option *ngFor="let level3authority of level3Authorities" [value]="level3authority">
+            {{level3authority.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+
+      <mat-form-field class="fullWidth">
+        <input
+          matInput
+          placeholder="First Name"
+          [(ngModel)]="model.firstName"
+          name="firstName"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth">
+        <input
+          matInput
+          placeholder="Last Name"
+          [(ngModel)]="model.lastName"
+          name="lastName"
+        />
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth">
+        <input
+          matInput
+          placeholder="Email"
+          [(ngModel)]="model.email"
+          name="email"
+        />
+      </mat-form-field>
+
+      <mat-card-actions style="margin-left: 5px;">
+        <button
+          mat-raised-button
+          matTooltip="Press to invite"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+        >
+          Invite
+        </button>
+
+        <!-- <button
+          mat-raised-button
+          style="margin-left: 5px;"
+          type="button"
+          routerLink="/users"
+        >
+          Back
+        </button> -->
+        <button mat-raised-button style="margin-left: 5px;"  [mat-dialog-close]="false" color="warn">Close</button>
+      </mat-card-actions>
+    </form>

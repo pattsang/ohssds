@@ -1,0 +1,77 @@
+<mat-card class="example-card">
+  <!-- 
+  <p>{{passedData.authority.topLevelName}}</p>
+  <p>{{passedData.authority.subTopLevelName}}</p>
+  <p>{{passedData.authority.hospitalLevelName}}</p>
+  <p>{{passedData.authority.departmentLevelName}}</p> 
+  -->
+  <p mat-dialog-title fxLayout fxLayoutAlign="center"> Edit Authority </p>
+
+  <mat-dialog-content>
+        <form
+        #editSiteForm="ngForm"
+        (submit)="updateSite()"
+        id="editSiteForm"
+      >
+              <mat-form-field class="fullWidth" value="selected" *appHasRole="['Super Admin']">
+                  <mat-icon style="cursor: pointer" *ngIf="subTopLevelName == 'N/A'">close</mat-icon>
+                <input matInput placeholder="Authority" [(ngModel)]="topLevelName"  name="topLevelName"
+                  value={{passedData.authority.topLevelName}}>
+              </mat-form-field>
+
+              <mat-form-field class="fullWidth" value="selected" *appHasRole="['Site Admin']">
+                <input matInput placeholder="Authority" [(ngModel)]="topLevelName"  name="topLevelName"
+                  value={{passedData.authority.topLevelName}} [readonly]=true>
+              </mat-form-field>
+
+              <mat-form-field class="fullWidth" *ngIf="subTopLevelName !== 'N/A'">
+                <mat-icon style="cursor: pointer" (click)="deleteSite(subTopLevelId)" *ngIf="hospitalLevelName == 'N/A'">close</mat-icon>
+                <input matInput placeholder="Site" [(ngModel)]="subTopLevelName" name="subTopLevelName"
+                  value={{passedData.authority.subTopLevelName}}>
+              </mat-form-field>
+
+              <mat-form-field class="fullWidth" *ngIf="hospitalLevelName !== 'N/A'">
+                <mat-icon style="cursor: pointer" (click)="deleteSite(hospitalLevelId)" *ngIf="departmentLevelName == 'N/A'">close</mat-icon>
+                <input matInput placeholder="Location" [(ngModel)]="hospitalLevelName"  name="hospitalLevelName"
+                  value={{passedData.authority.hospitalLevelName}}>
+              </mat-form-field>
+
+              <mat-form-field class="fullWidth" *ngIf="departmentLevelName !== 'N/A'">
+                <mat-icon style="cursor: pointer" (click)="deleteSite(departmentLevelId)" *ngIf="departmentLevelChildName == 'N/A'">close</mat-icon>
+                <input matInput placeholder="Department" [(ngModel)]="departmentLevelName" name="departmentLevelName"
+                  value={{passedData.authority.departmentLevelName}} >
+              </mat-form-field>
+             
+              <mat-form-field class="fullWidth" *ngIf="departmentLevelChildName !== 'N/A'">
+                <mat-icon style="cursor: pointer" (click)="deleteSite(departmentLevelChildId)" *ngIf="floorLevelName == 'N/A'">close</mat-icon>
+                  <input matInput placeholder="Sub-Department" [(ngModel)]="departmentLevelChildName" name="departmentLevelChildName"
+                    value={{passedData.authority.departmentLevelChildName}}>
+                </mat-form-field>
+
+                <mat-form-field class="fullWidth" *ngIf="floorLevelName !== 'N/A'">
+                  <mat-icon style="cursor: pointer" (click)="deleteSite(floorLevelId)">close</mat-icon>
+                    <input matInput placeholder="Floor" [(ngModel)]="floorLevelName" name="floorLevelName"
+                      value={{passedData.authority.floorLevelName}}>
+                  
+                  </mat-form-field>
+
+                  <button
+        mat-raised-button
+        style="margin-right:2%;"
+        type="submit"
+        form="editSiteForm"
+      >
+        Save
+      </button>
+  
+      <button mat-raised-button [mat-dialog-close]="false" color="warn">
+        Close
+      </button>
+                  <!-- <mat-dialog-actions >
+                      <button mat-raised-button (onclick)="updateSite()" color="primary">SUBMIT</button>
+                      <button mat-raised-button  [mat-dialog-close]="false" class="spacer-left" color="warn">CANCEL</button>
+                    </mat-dialog-actions> -->
+    </form>
+  </mat-dialog-content>
+  
+</mat-card>

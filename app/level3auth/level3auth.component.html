@@ -1,0 +1,20 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Authority" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <!-- <mat-form-field class="fullWidth">
+    <mat-select placeholder="Department" [(ngModel)]="selectedLevel3Authority" name="level3authority">
+      <mat-option *ngFor="let level3authority of level3Authorities" [value]="level3authority.authorityUnitId">
+        {{level3authority.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field> -->
+</form>
+
+ 

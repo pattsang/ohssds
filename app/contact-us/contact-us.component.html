@@ -1,0 +1,37 @@
+<section fxLayout fxLayoutAlign="center center">
+  <mat-card style="width: 65%;" fxLayout="column" fxLayoutAlign="center center">
+    <div mat-card-title>Contact Us</div>
+    <mat-card-content class="three-quarter-width">
+      <p body-2>Still have questions? Get in touch with us:</p>
+      <p>Complete the form below and and we will reach out to you within 2 business days</p>
+      <form [formGroup]="contactUsForm" (ngSubmit)="onFormSubmit(contactUsForm.value)" fxLayout="column"
+        fxLayoutAling="center center" style="width: 95%">
+        <mat-form-field class="demo-full-width">
+          <input formControlName="name" matInput placeholder="name">
+        </mat-form-field>
+        <mat-form-field class="demo-full-width">
+          <input formControlName="emailAddress" matInput placeholder="email address">
+        </mat-form-field>
+        <mat-form-field class="demo-full-width">
+          <input formControlName="healthAuthority" matInput placeholder="health authority">
+        </mat-form-field>
+        <mat-form-field class="demo-full-width">
+          <input formControlName="facility" matInput placeholder="facility">
+        </mat-form-field>
+        <mat-form-field class="demo-full-width">
+          <input formControlName="phoneNumber" matInput placeholder="phone number">
+        </mat-form-field>
+        <mat-form-field class="demo-full-width">
+          <input formControlName="subject" matInput placeholder="subject">
+        </mat-form-field>
+        <mat-form-field class="demo-full-width">
+          <input formControlName="message" matInput placeholder="message">
+        </mat-form-field>
+        <mat-card-actions fxLayout fxLayoutAlign="flex-end">
+          <button mat-raised-button color="primary">Submit</button>
+        </mat-card-actions>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <help></help>
+</section>

@@ -1,0 +1,80 @@
+<form #RegisterForm="ngForm" class="form-register" (ngSubmit)="register()" style="padding: 20px !important"
+>
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;"
+      >Register</mat-card-title
+    >
+    <div class="example-container container !important">
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Enter your email"
+            name="email"
+            [(ngModel)]="model.email"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="First name"
+            name="firstname"
+            [(ngModel)]="model.firstname"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Last name"
+            name="lastname"
+            [(ngModel)]="model.lastname"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Enter your password"
+            [type]="hide ? 'password' : 'text'"
+            required
+            name="password"
+            [(ngModel)]="model.password"
+            autocomplete="off"
+          />
+          <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="example-container">
+        <mat-form-field>
+          <input
+            matInput
+            placeholder="Confirm your password"
+            [type]="hide ? 'password' : 'text'"
+            required
+            name="confirmpassword"
+            [(ngModel)]="model.confirmpassword"
+            autocomplete="off"
+          />
+          <mat-icon style="cursor: pointer;" matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </mat-form-field>
+      </div>
+    </div>
+    <button mat-raised-button style="margin-right:5px" [disabled]="!RegisterForm.valid" type="submit">
+      Register
+    </button>
+    <button mat-raised-button [mat-dialog-close]="false">
+      Close
+    </button>
+    <br/>
+  </form>

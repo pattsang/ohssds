@@ -1,0 +1,58 @@
+<mat-card class="example-card">
+  <p mat-dialog-title fxLayout fxLayoutAlign="center"> Add Site </p>
+
+  <mat-dialog-content>
+    <form #addSiteForm (ngSubmit)="addSite()">
+        <mat-form-field class="fullWidth">
+            <mat-select placeholder="Parent Site" (selectionChange)="null" [(value)]="selectedAuthority" required>
+              <mat-option *ngFor="let authority of authorities" [value]="authority.authorityUnitId">
+                {{authority.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+      <!-- <mat-form-field class="example-full-width">
+          <input matInput placeholder="Parent Site" formControlName="parentSite" required>
+        </mat-form-field> -->
+        <mat-form-field class="example-full-width fullWidth">
+            <input matInput placeholder="Site Name" [(ngModel)]="newSiteName" name="newSiteName" required>
+          </mat-form-field>
+          <!-- <mat-form-field class="example-full-width fullWidth">
+              <input matInput placeholder="Enter Site Alias" [(ngModel)]="newSiteName" name="newSiteName" required>
+            </mat-form-field> -->
+      <div class="top-authority" class="fullWidth">
+        <!-- <mat-form-field class="fullWidth">
+          <mat-select placeholder="Authority" (selectionChange)="updateSite($event)" [(value)]="selectedAuthority">
+            <mat-option *ngFor="let authority of authorities" [value]="authority.authorityUnitId">
+              {{authority.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+      </div>
+      <div class="new-site"></div>
+      <!-- <button mat-raised-button [mat-dialog-close]="addSite()" color="primary">SUBMIT</button> -->
+      <mat-card-actions style="margin-left: 5px;">
+        <button  mat-raised-button
+        type="submit"
+        color="primary"
+          >SUBMIT</button>
+          <button mat-raised-button [mat-dialog-close]="false" color="warn">CANCEL</button>
+      </mat-card-actions>
+
+    </form>
+  </mat-dialog-content>
+</mat-card>
+<!-- 
+<mat-card-actions style="margin-left: 5px;">
+  <button  mat-raised-button
+    matTooltip="Press to assign"
+    aria-label="Button that displays a tooltip when focused or hovered over">Assign</button>
+    <button
+    mat-raised-button
+    style="margin-left: 5px;"
+    type="button"
+    routerLink="/users"
+  >
+    Back
+  </button>
+</mat-card-actions> -->

@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-title>Inventory Details</mat-card-title>
+  <mat-card-content>
+    <form>
+      <mat-form-field class="fullWidth" *ngFor="let product of productDetail">
+        <input readonly="true" matInput placeholder="Product Name" [(ngModel)]="product.product_name" name="product_name">
+      </mat-form-field>
+      <mat-form-field class="fullWidth" *ngFor="let product of productDetail">
+        <textarea matInput readonly="true" placeholder="Product Alias" [(ngModel)]="product.productAlias" name="productAlias"></textarea>
+      </mat-form-field>
+      <mat-form-field class="fullWidth" *ngFor="let product of productDetail">
+        <input readonly="true" matInput placeholder="Product Code" [(ngModel)]="product.product_code" name="product_code">
+      </mat-form-field>
+      <mat-form-field class="fullWidth" *ngFor="let product of productDetail">
+            <input readonly="true" matInput placeholder="Cas Number" [(ngModel)]="product.cas_no" name="cas_no">
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" *ngFor="let product of productDetail">
+        <input readonly="true" matInput placeholder="Health Hazard Class" [(ngModel)]="product.healthHazardClass" name="healthHazardClass">
+      </mat-form-field>
+
+      <mat-form-field class="fullWidth" *ngFor="let product of productDetail">
+        <input readonly="true" *ngIf="product.physicalHazardClass !== null" matInput placeholder="Physical Hazard Class" [(ngModel)]="product.physicalHazardClass" name="physicalHazardClass">
+      </mat-form-field>
+
+        <table *ngFor="let product of productDetail" cellspacing="0" cellpadding="0" border="0" width="325">
+            <tr>
+              <th>Location</th>
+              <th>Product Secondary Name</th>
+              <th>Date Added</th>
+              <th>Remove from Location</th>
+            </tr>
+            <tr *ngFor="let productInfo of product.health_authority">
+              <td>{{productInfo.location}}</td>
+              <td>{{productInfo.secondaryName}}
+                <span *ngIf="productInfo.secondaryName === null">N/A</span>
+                <span *appHasRole="['Site Admin']">
+                <mat-icon style="cursor: pointer;" *ngIf="productInfo.secondaryName === null" (click)="openCreateSecondaryNameModalWindow(productInfo)">library_add</mat-icon>
+                <mat-icon style="cursor: pointer;" *ngIf="productInfo.secondaryName !== null" (click)="openUpdateSecondaryNameModalWindow(productInfo)">edit</mat-icon>
+              </span>
+              </td>
+                
+                <td>{{productInfo.date_added}}
+                  <span *ngIf="productInfo.date_added === null">N/A</span>
+                </td>
+                <td><mat-icon style="cursor: pointer;" (click)="removeProductfromLocation(productInfo.rootAuthorityUnitId, productInfo.productAuthorityId)">close</mat-icon></td>
+            </tr>
+          </table>
+        
+         <mat-card-actions class="fullWidth" style="display:flex; align-items:flex-end !important; margin-left: 5px; ">
+        <button mat-raised-button *ngIf="internal" (click)="getSDSPDF()"><a [target]="'_blank'">View SDS</a></button>
+        <button mat-raised-button *ngIf="!internal" (click)="getCloudSDSPDF()" ><a>View SDS</a></button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+</mat-card>

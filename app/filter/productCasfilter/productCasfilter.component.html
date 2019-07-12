@@ -1,0 +1,5 @@
+  <mat-select placeholder="Filter By CasNumbers" [formControl]="casNumberList" multiple [(value)]="selected" (selectionChange)="onSelectCasNumber(selected)" >
+    <mat-option *ngFor="let casNumber of casNumbers" [value]="casNumber.casNumbers" >
+      {{  casNumber.casNumbers}}
+    </mat-option>
+  </mat-select>

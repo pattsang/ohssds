@@ -1,0 +1,57 @@
+<mat-toolbar  color="primary">
+    <div fxHide.gt-xs>
+        <button mat-icon-button (click)="onToggleSidenav()">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+    <div><a class="title-menu" routerLink="/search">SDS</a></div>
+    <div fxFlex fxLayout fxLayoutAlign="flex-end">
+        <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+            <li><a routerLink="/search" class="title-menu">Search</a></li>
+            <li><a *ngIf="loggedIn()" routerLink="/request" class="title-menu">Request</a></li>
+            <!-- <li *appHasRole="['Super Admin', 'Site Admin']" routerLinkActive="active"> -->
+            <li *ngIf="loggedIn()" class="title-menu">
+                <a [matMenuTriggerFor]="admin"> 
+                    <!-- <button *ngIf="loggedIn()" mat-button [matMenuTriggerFor]="admin">Administration</button> -->
+                    Administration
+                </a>
+                <mat-menu #admin="matMenu">
+                    <button mat-menu-item class="sub-title" routerLink="/authority">Sites</button>
+                    <button mat-menu-item class="sub-title" style="cursor: pointer;" routerLink="/authorityTree">Sites2</button>
+                    <!-- <button mat-menu-item class="sub-title">Companies</button> -->
+                    <!-- <button mat-menu-item class="sub-title" routerLink="/inventory-product">Products</button> -->
+                    <button mat-menu-item class="sub-title" style="cursor: pointer;" routerLink="/inventory-product">Inventory</button>
+                    <button mat-menu-item class="sub-title" style="cursor: pointer;" routerLink="/users">Users</button>
+                    <button mat-menu-item class="sub-title" style="cursor: pointer;" routerLink="/report">Reports</button>
+                </mat-menu>
+            </li>
+            <!-- <li><a routerLink="/help" class="title-menu" style="cursor: pointer;">Help</a></li> -->
+            <li><a routerLink="/contact-us" class="title-menu" style="cursor: pointer;">Contact Us</a></li>
+            <!-- <li><a routerLink="/login">Login</a></li> -->
+            <!-- <li *ngIf="loggedIn()" ><a>{{authService.decodedToken?.email}}</a></li> -->
+            <li *ngIf="loggedIn() && isLoggedInUser()" >
+                    <a [matMenuTriggerFor]="admin"> 
+                        {{authService.decodedToken?.email}}
+                    </a>
+                    <mat-menu #admin="matMenu">
+                        <!-- <button mat-menu-item [routerLink]="['/user-profile/', authService.decodedToken?.nameid]">Your Profile</button> -->
+                        <button mat-menu-item (click)="openUserProfileModalWindow(authService.decodedToken?.nameid)">Your Profile</button>
+                    </mat-menu>
+            </li>
+            <li *ngIf="loggedInWindowsUser() && isWindowsUser()" >
+                <a [matMenuTriggerFor]="admin"> 
+                    {{authService.decodedToken?.given_name}}
+                </a>
+                <mat-menu #admin="matMenu">
+                    <!-- <button mat-menu-item [routerLink]="['/user-profile/', authService.decodedToken?.nameid]">Your Profile</button> -->
+                    <button mat-menu-item (click)="openUserProfileModalWindow(authService.decodedToken?.nameid)">Your Profile</button>
+                </mat-menu>
+        </li>
+            <li *ngIf="!loggedIn()"  class="title-menu"><a (click)="openLoginModalWindow()">Login</a></li>
+            <!-- <li *ngIf="!loggedIn()" class="title-menu"><a routerLink="/register">Register</a></li> -->
+            <!-- <li> <div class="tooltip">  <span class="tooltiptext">For mobile testing</span>
+                <img *ngIf="loggedIn()" style="width: 50px;" src="assets/qrCode/qrCode.png"></div></li> -->
+            <li *ngIf="loggedIn()" class="title-menu"  (click)="logout()">Logout</li>
+        </ul>
+    </div>
+</mat-toolbar>

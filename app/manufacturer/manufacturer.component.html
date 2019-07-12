@@ -1,0 +1,28 @@
+<mat-card>
+  <mat-card-title>
+    <!-- <span *ngIf="quiz.id">Edit Quiz</span>
+    <span *ngIf="!quiz.id">New Quiz</span> -->
+    <span>Company</span>
+  </mat-card-title>
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner color="primary" mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
+  <mat-list *ngFor="let company of companies">
+    <mat-list-item class="clickLink" (click)="null">{{company.name}}</mat-list-item>
+    <mat-divider></mat-divider>
+</mat-list>
+<mat-card-content>
+  <!-- <form>
+    <mat-form-field class="fullWidth">
+      <input matInput color="secondary"/>
+    </mat-form-field>
+  </form> -->
+</mat-card-content>
+<mat-card-actions>
+  <!-- <button  (click)="getCompanies()" mat-raised-button>Get Company</button> -->
+  <!-- <button *ngIf="quiz.id" (click)="quiz = {}" mat-button>NEW</button>
+  <button *ngIf="quiz.id" [routerLink]="['/question', quiz.id]" mat-button>EDIT QUESTION</button>
+  <button *ngIf="!quiz.id" (click)="api.postQuiz(quiz)" mat-button>POST</button> -->
+</mat-card-actions>
+</mat-card>

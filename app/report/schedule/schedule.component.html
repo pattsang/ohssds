@@ -1,0 +1,28 @@
+<report-menu></report-menu>
+<section fxLayout fxLayoutAlign="center center">
+  <mat-card class="result" style="width: 60%;">
+    <mat-card-content>
+      <h4 >Currently Schedule Report</h4>
+
+      <mat-card-actions fxLayout fxLayoutAlign="flex-end">
+        <button mat-raised-button style="margin-right: 15%;" color="primary">Create Report</button>
+      </mat-card-actions>
+
+      <app-auth-levels 
+        (selectedAuthorityChange)="onReceivedTopLevel($event)" 
+        [selectedAuthority]="selectedAuthority" 
+
+        (selectedLevel1AuthorityChange)="onReceivedLevel1($event)"
+        [selectedLevel1Authority]= "selectedLevel1Authority"
+
+        (selectedLevel2AuthorityChange) = "onReceivedLevel2($event)"
+        [selectedLevel2Authority]= "selectedLevel2Authority"
+
+      >
+      
+      </app-auth-levels>
+
+    </mat-card-content>
+  </mat-card>
+</section>
+ 

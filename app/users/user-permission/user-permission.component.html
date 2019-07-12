@@ -1,0 +1,42 @@
+  <mat-card-title>Assign Permission</mat-card-title>
+  <mat-card-content>
+    <form (ngSubmit)="assignPermission()" #permissionForm = "ngForm">
+        <!-- <div *ngIf="permissionForm.submitted" style="background-color: yellowgreen"><p><strong>This user has been assigned a role</strong></p></div> -->
+      <mat-form-field class="fullWidth">
+        <input
+          matInput
+          placeholder="Email"
+          name="{{userEmailAddress}}"
+          value="{{userEmailAddress}}"  
+          readonly                  
+        />
+        <mat-hint>Readonly field</mat-hint>
+      </mat-form-field>
+        <mat-form-field class="fullWidth">
+        <mat-select placeholder="Permission" [(ngModel)]="selectedRole" name="selectedRole" >
+          <mat-option *ngFor="let role of roles"  [value]="role.roleName">
+            {{role.roleName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <!-- <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="test" [(ngModel)]="roles.roleName" name="roleName"></textarea>
+        </mat-form-field> -->
+
+
+      <mat-card-actions style="margin-left: 5px;">
+        <button
+          mat-raised-button
+          matTooltip="Assign Permission"
+          aria-label="Button that displays a tooltip when focused or hovered over"
+          type="submit"
+        >
+          Assign
+        </button>
+
+        <button mat-raised-button style="margin-left: 5px;"  [mat-dialog-close]="false" color="warn">Close</button>
+
+      </mat-card-actions>
+    </form>
+  </mat-card-content>

@@ -1,0 +1,8 @@
+<div *ngFor="let model of locationTree">
+    <mat-checkbox
+      #checkbox="matCheckbox"
+      [checked]="model.selected"
+      (click)="onSelectedLocationTree(checkbox, model)"
+      >{{model.topLevelName}}</mat-checkbox>
+  </div>
+  

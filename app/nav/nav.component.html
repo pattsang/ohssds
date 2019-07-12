@@ -1,0 +1,49 @@
+
+
+<mat-toolbar >
+    <button mat-button routerLink="/app-product" >SAFETY DATA SHEETS</button>
+  <button mat-button routerLink="/app-product">Search</button>
+  <button mat-button routerLink="/request">SDS Request</button>
+ 
+ 
+  <!-- <button mat-button routerLink="/app-manufacturer">Company</button> -->
+  
+  <button *ngIf="loggedIn()" mat-button [matMenuTriggerFor]="admin">Administration</button>
+<mat-menu #admin="matMenu">
+  <button mat-menu-item>Sites</button>
+  <button mat-menu-item>Companies</button>
+  <button mat-menu-item>Products</button>
+  <button mat-menu-item routerLink="/users">Users</button>
+  <button mat-menu-item>Reports</button>
+</mat-menu>
+
+  <span style="flex: 1 1 auto;"></span>
+  <button *ngIf="loggedIn()" mat-button>{{authService.decodedToken?.email}} </button>
+ 
+  <button *ngIf="!loggedIn()" mat-button routerLink="/login">Login</button>
+  <button *ngIf="!loggedIn()" mat-button routerLink="/register">Register</button>
+  <button *ngIf="loggedIn()" mat-button (click)="logout()">Logout</button>
+ 
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>link</mat-icon>
+      <span>SDS Link</span>
+    </button>
+    <button mat-menu-item >
+      <mat-icon>voicemail</mat-icon>
+      <span>Product Page</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>print</mat-icon>
+      <span>Print Label</span>
+    </button>
+  </mat-menu>
+  <button mat-button >Help</button>
+  <button mat-button >Contact Us</button>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+  <!-- <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/register">Register</button>
+  <button *ngIf="!auth.isAuthenticated" mat-button routerLink="/login">Login</button>
+  <button *ngIf="auth.isAuthenticated" mat-button (click)="auth.logout()">Logout</button> -->
+</mat-toolbar>

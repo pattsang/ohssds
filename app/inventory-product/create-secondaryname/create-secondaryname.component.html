@@ -1,0 +1,27 @@
+<form
+#createSecondaryNameForm="ngForm"
+(submit)="createSecondaryProductName()"
+id="createSecondaryNameForm"
+>
+<mat-form-field class="fullWidth">
+  <input
+    matInput
+    placeholder="Product Secondary Name"
+    name="secondaryName"
+    [(ngModel)]="secondaryName"
+  />
+</mat-form-field>
+
+<button
+  mat-raised-button
+  style="margin-right: 2%"
+  type="submit"
+  form="createSecondaryNameForm"
+>
+  Save
+</button>
+
+<button mat-raised-button [mat-dialog-close]="false" color="warn">
+  Close
+</button>
+</form>

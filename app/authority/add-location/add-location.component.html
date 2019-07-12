@@ -1,0 +1,56 @@
+<mat-card class="example-card">
+    <p mat-dialog-title fxLayout fxLayoutAlign="center"> Add Location </p>
+  
+    <mat-dialog-content>
+      <form #editSiteForm (ngSubmit)="addLocation()">
+          <mat-form-field class="fullWidth">
+              <mat-select placeholder="Parent Site" (selectionChange)="onUserSelectTop()" [(value)]="selectedAuthority" required> 
+                <mat-option *ngFor="let authority of authorities" [value]="authority.authorityUnitId">
+                  {{authority.name}}
+                </mat-option>
+              </mat-select>
+              <mat-hint>This must be selected first</mat-hint>
+            </mat-form-field>
+        
+        <div class="top-authority">
+          
+        </div>
+        <div class="new-site">
+          <mat-form-field class="fullWidth">
+            <mat-select placeholder="Current Locations" (selectionChange)="onUserSelectLevel1($event)" [(value)] = "selectedLevel1Authority" required>
+              <mat-option *ngFor="let level1authority of level1Authorities" [value]="level1authority.authorityUnitId">
+                {{level1authority.name}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>This must be selected second</mat-hint>
+          </mat-form-field>
+  
+          <!-- <mat-form-field class="fullWidth">
+            <mat-select placeholder="Site" (selectionChange)="onUserSelectLevel2($event)" [(value)] = "selectedLevel2Authority" required>
+              <mat-option *ngFor="let level2authority of level2Authorities" [value]="level2authority.authorityUnitId">
+                {{level2authority.name}}
+              </mat-option>
+              <mat-hint>This must be selected third</mat-hint>
+            </mat-select>
+          </mat-form-field>  -->
+  
+          <mat-form-field class="example-full-width fullWidth">
+            <input matInput placeholder="New Location Name" [(ngModel)]="newLocationName" name="newSiteName" required>
+          </mat-form-field>
+  
+        </div>
+        <mat-card-actions style="margin-left: 5px;">
+          <button  mat-raised-button
+          type="submit"
+          color="primary"
+            >SUBMIT</button>
+            <button mat-raised-button [mat-dialog-close]="false" color="warn">CANCEL</button>
+        </mat-card-actions>
+      </form>
+    </mat-dialog-content>
+    <!-- <mat-dialog-actions>
+      <button mat-raised-button [mat-dialog-close]="addLocation()" color="primary">SUBMIT</button>
+      <button mat-raised-button [mat-dialog-close]="false" color="warn">CANCEL</button>
+    </mat-dialog-actions> -->
+  </mat-card>
+  

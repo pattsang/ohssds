@@ -1,0 +1,32 @@
+mat-card {
+    height: 100vh;
+}
+
+.left-25 {
+    width: 25%;
+    height: 75vh;
+    /* border: 1px solid lightgrey; */
+    padding: 10px;
+}
+
+.right-70 {
+    width: 70%;
+    height: 75vh;
+    /* border: 1px solid lightgrey; */
+    padding: 10px;
+}
+
+.search-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+/* 
+.mat-select-arrow {
+    width: 2px !important;
+    margin: 0 20px !important;
+    border-left: 10px solid transparent !important;
+    border-right: 10px solid transparent !important;
+    border-top: 15px solid !important;
+} */

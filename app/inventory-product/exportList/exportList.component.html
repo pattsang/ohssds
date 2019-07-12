@@ -1,0 +1,27 @@
+<div
+*ngIf="isLoading"
+style="display: flex; justify-content: center; align-items: center; max-height: 95%;  overflow: auto">
+<mat-progress-bar
+  color="primary"
+  mode="indeterminate"
+></mat-progress-bar>
+</div>
+
+<mat-card>
+  <mat-card-title>Export List</mat-card-title>
+
+    <mat-checkbox class="example-margin" name="productNameChecked" [(ngModel)]="productNameChecked" [checked]="productNameChecked" (change)="onProductNameChecked()">Product Name</mat-checkbox>
+
+    <br />
+    <mat-checkbox class="example-margin" name="productCodeChecked" [(ngModel)]="productCodeChecked" [checked]="productCodeChecked" (change)="onProductCodeChecked()">Product Code</mat-checkbox>
+    <br />
+    <mat-checkbox class="example-margin" name="casNumberChecked" [(ngModel)]="casNumberChecked" [checked]="casNumberChecked" (change)="onCasNumberChecked()">Cas Number</mat-checkbox>
+    <br />
+    <mat-checkbox class="example-margin" name="manufacturerNameChecked" [(ngModel)]="manufacturerNameChecked" [checked]="manufacturerNameChecked" (change)="onManufacturerNameChecked()">Manufacturer</mat-checkbox>
+    <br />
+    <mat-checkbox class="example-margin" name="locationChecked" [(ngModel)]="locationChecked" [checked]="locationChecked" (change)="onLocationChecked()">Location</mat-checkbox>
+<br/> <br/>
+    <button mat-raised-button color="primary" (click)="exportProductList()"><a [target]="'_blank'">Submit</a></button>
+  <button mat-raised-button  [mat-dialog-close]="false" class="spacer-left" color="warn">Cancel</button>
+<!-- </form> -->
+</mat-card>

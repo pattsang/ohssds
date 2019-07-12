@@ -1,0 +1,197 @@
+<!-- <section fxLayout fxLayoutAlign="center center">
+    <mat-card style="width: 65%;" fxLayout="column" fxLayoutAlign="center center">
+        <div mat-card-title>SDS Request</div>
+        <mat-card-content style="width:95%;">
+            <form [formGroup]="requestForm" (ngSubmit)="onFormSubmit(requestForm.value)" fxLayout="column"
+                fxLayoutAling="center center" style="width: 95%">
+                <div class="sub-title-bold">Product Information</div>
+                <mat-form-field >
+                    <input formControlName="supplierManufacturer" matInput placeholder="supplier manufacturer">
+                </mat-form-field>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="productName" matInput placeholder="product name">
+                </mat-form-field>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="catalogNumber" matInput placeholder="catalog number">
+                </mat-form-field>
+                <div class="sub-title-bold">Your Contact Information</div>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="fullName" matInput placeholder="Full Name">
+                </mat-form-field>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="emailAddress" matInput placeholder="email address" readonly>
+                </mat-form-field>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="phoneNumber" matInput placeholder="phone number">
+                </mat-form-field>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="healthAuthority" matInput placeholder="health authority">
+                </mat-form-field>
+                <mat-form-field class="demo-full-width">
+                    <input formControlName="department" matInput placeholder="department">
+                </mat-form-field>
+                <mat-card-actions fxLayout fxLayoutAlign="flex-end">
+                    <button mat-raised-button color="primary" (click)="openDiaglogRequest()">Submit</button>
+                </mat-card-actions>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</section> -->
+
+<section fxLayout fxLayoutAlign="center center">
+  <mat-card style="width: 65%;" fxLayout="column" fxLayoutAlign="center center">
+    <div mat-card-title>SDS Request</div>
+    <mat-card-content style="width:95%;">
+      <form
+        id="requestId"
+        #requestForm="ngForm"
+        (submit)="processForm(requestForm)"
+      >
+        <h2>
+          Product Request
+        </h2>
+
+        <button
+          class="actions"
+          mat-raised-button
+          type="submit"
+          id="requestId"
+          (click)="submitButton()"
+          [disabled]="clicked > 4"
+          style="margin-bottom: 3%; margin-left: 80%;"
+        >
+          Click To Add
+        </button>
+        <ng-template
+          ngFor
+          let-request
+          [ngForOf]="form.requests"
+          let-index="index"
+          let-isLast="last"
+        >
+          <div
+            class="request"
+            [class.request--invalid]="
+              nameControl.touched && nameControl.invalid
+            "
+          >
+            <mat-form-field style="margin-right:2%">
+              <input
+                #nameControl="ngModel"
+                matInput
+                type="text"
+                name="name_{{ request.id }}"
+                [(ngModel)]="request.productName"
+                required
+                autofocus
+                size="20"
+                placeholder="Product Name"
+              />
+            </mat-form-field>
+
+            <mat-form-field style="margin-right:2%">
+              <input
+                type="text"
+                matInput
+                name="manufacturer_{{ request.id }}"
+                [(ngModel)]="request.manufacturer"
+                required
+                size="10"
+                placeholder="Manufacturer"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <input
+                type="text"
+                matInput
+                name="casNumber{{ request.id }}"
+                [(ngModel)]="request.casNumber"
+                required
+                size="10"
+                placeholder="Catalog number"
+              />
+            </mat-form-field>
+
+            <a
+              style="cursor: pointer;"
+              (click)="removeProductRequest(index)"
+              title="Remove Product"
+              class="remove"
+            >
+              &times;
+            </a>
+          </div>
+        </ng-template>
+
+        <br />
+
+        <div class="sub-title-bold">Your Contact Information</div>
+
+        <mat-form-field class="fullWidth">
+          <input [(ngModel)]="fullName" name="fullName" matInput placeholder="Full Name" required />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <input [(ngModel)]="email" name="email" matInput placeholder="Email Address" required />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <input [(ngModel)]="phoneNumber" name="phoneNumber" matInput placeholder="Phone Number" required />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <input [(ngModel)]="healthAuthority" name="healthAuthority" matInput placeholder="Health Authority/Employer" required />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <input [(ngModel)]="facility" name="facility" matInput placeholder="Facility" required />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <input [(ngModel)]="department" name="department" matInput placeholder="Department" required />
+        </mat-form-field>
+
+        <mat-form-field class="fullWidth">
+          <textarea [(ngModel)]="comment" name="comment" matInput placeholder="Comment" required></textarea>
+        </mat-form-field>
+
+        <p>To request more products, please download the excel template:</p>
+        <a href="assets/requestForm/ProductRequestForm.xls" download>
+          <p>Please click here</p>
+        </a>
+
+        <p>
+          After filling out the excel document, please mail this to:
+          <a href="mailto:msdsrequest@phsa.ca">msdsrequest@phsa.ca</a>
+        </p>
+
+        <br />
+        <br />
+        <br />
+
+        <button
+          class="actions"
+          mat-raised-button
+          type="submit"
+          [disabled]="!requestForm.form.valid"
+          style="margin-bottom: 5%"
+          (click)="sdsRequest()"
+        >
+          Submit Request
+        </button>
+
+        <!-- <button
+        class="actions"
+        mat-raised-button
+        type="submit"
+        [disabled]="!requestForm.form.valid"
+        style="margin-bottom: 5%"
+      >
+        Submit Request
+      </button> -->
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

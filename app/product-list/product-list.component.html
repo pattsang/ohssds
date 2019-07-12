@@ -1,0 +1,82 @@
+<mat-tab-group>
+  <mat-tab label="Products">
+
+    <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+      <mat-progress-spinner color="primary" mode="indeterminate">
+      </mat-progress-spinner>
+    </mat-card>
+    <div class="order-container">
+      <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+
+        <ng-container matColumnDef="productName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear> Product Name </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.productName}}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="productCode">
+          <th mat-header-cell *matHeaderCellDef>
+            <!-- <mat-checkbox (change)="selectAll()"></mat-checkbox> -->
+            Product Code
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- <mat-checkbox [checked]="element.isChecked"></mat-checkbox> -->
+            {{element.productCode}}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="revisionDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Revision Date </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.revisionDate | date:'MM/dd/yy'}}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="manufacturerName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Manufacturer </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.manufacturerName}}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="AdditionalSupplier">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Addtional Supplier </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.additionalSupplier}}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastVerifiedDate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Verfied Date </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{element.total | currency}} -->
+            {{element.lastVerifiedDate | date:'MM/dd/yy'}}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky:true;"></tr>
+        <tr mat-row *matRowDef="let row;columns:displayedColumns;" (click)="selectRow(row)"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky:true;"></tr>
+      </table>
+      <!-- <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center">
+        <mat-progress-spinner color="primary" mode="indeterminate">
+        </mat-progress-spinner>
+      </mat-card> -->
+    </div>
+
+    <mat-paginator #paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+      (page)="onPageChange($event)"></mat-paginator>
+
+  </mat-tab>
+
+</mat-tab-group>
+<app-product-detail *ngIf="rowSelected" [rowSelected]="rowSelected"></app-product-detail>

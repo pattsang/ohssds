@@ -1,0 +1,33 @@
+  <form
+    (ngSubmit)="resendConfirmationEmail()"
+  >
+    <mat-card-title style="margin: 0 auto !important; padding-bottom: 10px;">Resend Email</mat-card-title>
+
+    <!-- <div class="example-container container !important"> -->
+      <!-- <div class="example-container"> -->
+        <mat-form-field class="fullWidth">
+          <input
+            matInput
+            placeholder="Resend Email"
+            name="email"
+            [(ngModel)]="email"
+            required
+          />
+        </mat-form-field>
+      <!-- </div>    -->
+    <!-- </div> -->
+
+    <div>
+      <button
+        mat-raised-button
+        class="btn btn-lg btn-primary btn-block button"
+        type="submit"
+      >
+        Submit
+      </button>
+      <!-- <button mat-raised-button  style="margin-left: 5px;" type="button" routerLink="/users">Back</button> -->
+      <button mat-raised-button style="margin-left: 5px;"  [mat-dialog-close]="false" color="warn">Close</button>
+
+
+    </div>
+  </form>

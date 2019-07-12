@@ -1,0 +1,142 @@
+<!-- <section gdAreas="invite search search | left-content right-content right-content" gdGap="5px" gdRows="auto auto auto">
+  <div gdArea="invite" fxLayoutAlign="center center" style="height:40px; margin-top:40px;">
+    
+  </div> -->
+ 
+  <section gdAreas="invite search search | left-content right-content right-content" gdGap="5px" gdRows="auto auto auto">
+
+<br/> <br/>
+  <div gdArea="search" fxLayoutAlign="center center">
+    <!-- just to hold space -->
+  </div>
+  
+  <div gdArea="left-content">
+      <div fxLayout fxLayoutAlign="center center" style="height: 50px; margin: 35px;">
+          <!-- this is a spacer, not being used -->
+      </div>
+
+      <mat-card style="width:90%; margin: 5px auto; box-shadow: -4px 4px #C6C6C6;">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding style="padding-left: 10px !important">
+            <button mat-icon-button disabled></button>
+            <!-- <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon> -->
+            <!-- <mat-checkbox class="checklist-leaf-node"
+                          [checked]="checklistSelection.isSelected(node)"
+                          (change)="todoLeafItemSelectionToggle(node)"  style="font-size: 90% !important; font: bold !important; padding-left: 10px !important">{{node.item}}</mat-checkbox> -->
+                          <mat-checkbox class="checklist-leaf-node"
+                          [checked]="checklistSelection.isSelected(node)"
+                           style="font-size: 90% !important; font: bold !important; padding-left: 10px !important">{{node.item}}</mat-checkbox>
+                          <!-- <button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button> -->
+                          <!-- <button mat-icon-button (click)="updateNode(node)"><mat-icon>edit</mat-icon></button> -->
+          </mat-tree-node>
+        
+          <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding style="padding-left: 10px !important">
+            <button mat-icon-button disabled></button>
+            <mat-form-field>
+              <input matInput #itemValue placeholder="New item...">
+            </mat-form-field>
+            <!-- <button mat-button (click)="saveNode(node, itemValue.value)">Save</button> -->
+          </mat-tree-node>
+        
+          <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding style="padding-left: 10px !important">
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'toggle ' + node.filename">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <mat-checkbox [checked]="descendantsAllSelected(node)"
+                          
+                          (change)="todoItemSelectionToggle(node)" style="font-size: 90% !important; font:bold !important; padding-left: 10px !important">{{node.item}}</mat-checkbox>
+            <!-- <button mat-icon-button *ngIf="node.hasChild" (click)="removeNode(node)"><mat-icon>clear</mat-icon></button> -->
+          </mat-tree-node>
+        </mat-tree>
+        <button mat-raised-button style="margin-left: 20px" (click)="assignLocation()">Assign</button>
+    </mat-card>
+            </div>
+            <div gdArea="right-content" gdColumn="2 / span 2" >
+
+<span class="mat-elevation-z8" >
+    <div fxLayout fxLayoutAlign="center center">
+    <mat-form-field fxFlex="40%">
+      <input matInput type="text" (keyup)="doFilter($event.target.value)" placeholder="Filter" />
+    </mat-form-field>
+  </div>
+  <button mat-raised-button style="margin-right: 5px;" *appHasRole="['Super Admin']" (click)="openCreateInternalUser()">Create Internal User</button>
+  <button mat-raised-button (click)="openInvitationModalWindow()">Invite User</button>
+  <br/> <br/>
+
+<table mat-table [dataSource]="MyDataSource" class="mat-elevation-z8">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null; isAllSelected()"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let user"> {{user?.firstName}} {{user?.lastName}}  </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="permissions">
+      <th mat-header-cell *matHeaderCellDef> Permissions </th>
+      <td mat-cell *matCellDef="let user"> 
+        <span *ngIf="user.permissions === null">N/A</span>
+        <span *ngIf="user.permissions">{{user?.permissions}}
+          <mat-icon *ngIf="user.permissions !== 'InActive'" style="cursor: pointer" (click)="openUserPermissionModalWindow(user)">edit</mat-icon>
+        </span> 
+      </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="resent/invite">
+      <th mat-header-cell *matHeaderCellDef> Edit/Resent Invite </th>
+      <td mat-cell *matCellDef="let user">
+        <mat-icon style="cursor: pointer" (click)="openResendEmailConfirmation(user)" *ngIf="!user.isActive" >mail_outline</mat-icon>
+        <mat-icon style="cursor: pointer" (click)="openUserEditModalWindow(user)" *ngIf="user.isActive" >edit</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="locations">
+      <th mat-header-cell *matHeaderCellDef> User Location </th>
+      <td mat-cell *matCellDef="let user"> 
+          <mat-icon style="cursor: pointer" (click)="openUserLocationModalWindow(user.userOutsideId)">add_location</mat-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef> Delete </th>
+      <td mat-cell *matCellDef="let user">
+        <span *ngIf="user.permissions === 'Regular' || user.permissions === 'InActive' || user.permissions === 'N/A' || user.permissions === null || user.permissions === ''">
+            <mat-icon style="cursor: pointer" (click)="removeSelectedUser(user.userOutsideId)">delete</mat-icon>
+        </span>
+        <span *ngIf="user.permissions === 'Super Admin' || user.permissions === 'Site Admin'">
+        <mat-icon>block</mat-icon>
+        </span>
+      </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr matTooltip="{{row.userLocation}}" mat-row *matRowDef="let row; columns: displayedColumns;"
+        (click)="selection.toggle(row)">
+    </tr>
+    
+  </table>
+  <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
+  </span>
+  </div>
+</section>
